@@ -1,4 +1,4 @@
-<!-- home/index.html -->
+
 {% load static %}
 
 <!DOCTYPE html>
@@ -10,30 +10,34 @@
     <title>Ramblin' Recipes</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 </head>
 <body>
     <section class="section custom-title-padding">
-        <h1 class="title is-1">Ramblin' Recipes</h1>
+        <div class = ".bungee-regular">
+            <h1 class="title is-1">Ramblin' Recipes</h1>
+        </div>
     </section>
 
     <section class="section custom-form-padding">
-        <!-- Display form errors (if any) -->
         {% if form.errors %}
             <div class="notification is-danger">
-                <p><strong>Error:</strong> Please fix the following issues:</p>
+                <p><strong>Error:</strong></p>
                 <ul>
                     {% for field, errors in form.errors.items %}
-                        <li>{{ field.label }}: {{ errors }}</li>
+                        <li>{{ field.label }} {{ errors }}</li>
                     {% endfor %}
                 </ul>
             </div>
         {% endif %}
     
-        <!-- Display the search form -->
+    
         <form method="POST">
             {% csrf_token %}
     
-            <!-- For each form field, wrap it in a field and control container -->
             <div class="field">
                 <label class="label">{{ form.skill_level.label }}</label>
                 <div class="control">
@@ -50,15 +54,16 @@
     
             <div class="field">
                 <label class="label">{{ form.ingredients.label }}</label>
+                <div class = "text-field">
                 <div class="control">
                     {{ form.ingredients }}
                 </div>
+                </div>
             </div>
     
-            <!-- Submit button -->
             <div class="field">
                 <div class="control" style="display: flex; justify-content: center;">
-                    <button type="submit" class="button is-primary">Get Recommendations</button>
+                        <button type="submit" class="button is-primary">Get Recommendations</button>
                 </div>
             </div>
         </form>
@@ -66,12 +71,12 @@
     </section>
 
     <section class="section custom-results-padding">
-        <h2 class="title is-2">Recommended Recipes:</h2>
+        <h2 class="title is-3">Recommended Recipes:</h2>
         <div class="columns is-multiline">
             {% if recipes %}
                 {% for recipe in recipes %}
                     <div class="column is-half">
-                        <div class="card"> <!-- Set a fixed height -->
+                        <div class="card">
                             <div class="card-content">
                                 <p class="title is-4">
                                     <a href="{{ recipe.sourceUrl }}" target="_blank">{{ recipe.title }}</a>
