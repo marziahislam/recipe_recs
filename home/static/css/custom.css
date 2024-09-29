@@ -1,0 +1,32 @@
+body {
+    margin-left: 20px;  /* Change the value to what you need */
+}
+
+.custom-title-padding {
+    padding-bottom: 1rem;
+}
+
+.custom-form-padding {
+   
+}
+
+.custom-results-padding {
+
+}
+
+.button.is-primary {
+    margin-top: 1rem;
+}
+
+.card {
+    height: 350px; /* Set a standard height for all cards */
+    display: flex;
+    flex-direction: column; /* Ensure flex direction for uniformity */
+}
+
+.card-content {
+    flex-grow: 1; /* Allow content to grow */
+    display: flex;
+    flex-direction: column; /* Stack content vertically */
+    justify-content: space-between; /* Space out elements evenly */
+}

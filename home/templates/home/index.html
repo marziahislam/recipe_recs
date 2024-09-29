@@ -1,4 +1,5 @@
 <!-- home/index.html -->
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -7,52 +8,95 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipe Recommendations</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
 </head>
 <body>
-    <h1>Get Recipe Recommendations</h1>
+    <section class="section custom-title-padding">
+        <h1 class="title is-1">Get Recipe Recommendations</h1>
+    </section>
 
-    <!-- Display form errors (if any) -->
-    {% if form.errors %}
-        <div style="color: red;">
-            <p><strong>Error:</strong> Please fix the following issues:</p>
-            <ul>
-                {% for field, errors in form.errors.items %}
-                    <li>{{ errors }}</li>
+    <section class="section custom-form-padding">
+        <!-- Display form errors (if any) -->
+        {% if form.errors %}
+            <div class="notification is-danger">
+                <p><strong>Error:</strong> Please fix the following issues:</p>
+                <ul>
+                    {% for field, errors in form.errors.items %}
+                        <li>{{ field.label }}: {{ errors }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    
+        <!-- Display the search form -->
+        <form method="POST">
+            {% csrf_token %}
+    
+            <!-- For each form field, wrap it in a field and control container -->
+            <div class="field">
+                <label class="label">{{ form.skill_level.label }}</label>
+                <div class="control">
+                    {{ form.skill_level }}
+                </div>
+            </div>
+    
+            <div class="field">
+                <label class="label">{{ form.ingredients.label }}</label>
+                <div class="control">
+                    {{ form.ingredients }}
+                </div>
+            </div>
+    
+            <!-- Submit button -->
+            <div class="field">
+                <div class="control">
+                    <button type="submit" class="button is-primary">Get Recommendations</button>
+                </div>
+            </div>
+        </form>
+    
+        <hr>
+    </section>
+
+    <section class="section custom-results-padding">
+        <h2 class="title is-2">Recommended Recipes:</h2>
+        <div class="columns is-multiline">
+            {% if recipes %}
+                {% for recipe in recipes %}
+                    <div class="column is-half">
+                        <div class="card" style="height: 350px;"> <!-- Set a fixed height -->
+                            <div class="card-content">
+                                <p class="title is-4">
+                                    <a href="{{ recipe.sourceUrl }}" target="_blank">{{ recipe.title }}</a>
+                                </p>
+                                <div class="columns">
+                                    <div class="column is-one-third">
+                                        <figure class="image is-4by3">
+                                            <img src="{{ recipe.image }}" alt="{{ recipe.title }}" style="height: auto;">
+                                        </figure>
+                                    </div>
+                                    <div class="column">
+                                        <p class="subtitle is-6">Ready in {{ recipe.readyInMinutes }} minutes</p>
+                                        <div class="content">
+                                            Ingredients: 
+                                            {{ recipe.all_ingredients|join:', ' }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 {% endfor %}
-            </ul>
+            {% else %}
+                <p>No recipes found based on your search.</p>
+            {% endif %}
         </div>
-    {% endif %}
-
-    <!-- Display the search form -->
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Get Recommendations</button>
-    </form>
-
-    <hr>
-
-    <!-- Display the search results -->
-    <h2>Recommended Recipes:</h2>
-<ul>
-    {% if recipes %}
-        {% for recipe in recipes %}
-            <li>
-                <img src="{{ recipe.image }}" alt="{{ recipe.title }}" style="width: 200px; height: auto;">
-                <a href="{{ recipe.sourceUrl }}" target="_blank">{{ recipe.title }}</a>
-                <p>Ready in {{ recipe.readyInMinutes }} minutes</p>
-                <p>Ingredients: 
-                    {{ recipe.all_ingredients|join:', ' }}  <!-- Join ingredients with a comma -->
-                </p>
-            </li>
-        {% endfor %}
-    {% else %}
-        <p>No recipes found based on your search.</p>
-    {% endif %}
-</ul>
-
+    </section>
     
-    
+   
+
+
 
 </body>
 </html>
