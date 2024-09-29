@@ -1,9 +1,10 @@
 body {
-    margin-left: 20px;  /* Change the value to what you need */
+    /* margin-left: 20px;  Change the value to what you need */
 }
 
 .custom-title-padding {
     padding-bottom: 1rem;
+    background-color: #E4E3D3;
 }
 
 .custom-form-padding {
@@ -11,7 +12,8 @@ body {
 }
 
 .custom-results-padding {
-
+    background-color: #E4E3D3;
+    margin-top: 0;
 }
 
 .button.is-primary {
@@ -19,14 +21,68 @@ body {
 }
 
 .card {
-    height: 350px; /* Set a standard height for all cards */
+    height: 300px; /* Set a standard height for all cards */
     display: flex;
     flex-direction: column; /* Ensure flex direction for uniformity */
+    /* background-color: rgb(250, 237, 212); */
 }
 
 .card-content {
     flex-grow: 1; /* Allow content to grow */
     display: flex;
     flex-direction: column; /* Stack content vertically */
-    justify-content: space-between; /* Space out elements evenly */
+    justify-content: flex-start; /* Align items at the start */
 }
+
+.recipe-title {
+    margin-bottom: 1rem; /* Add a consistent margin below the title */
+}
+
+.is-4by3 {
+    height: auto;
+    width: auto;
+}
+
+.field {
+    margin-bottom: 0;
+    float: left;
+    width: 25%;
+    padding: 10px;
+}
+
+.control input, 
+.control select {
+    width: 70%; /* Full width */
+    padding: 10px; /* Space inside the fields */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 6px; /* Rounded corners */
+    font-size: 16px; /* Font size */
+    background-color: #bdd1bf; /* Background color */
+    transition: border-color 0.3s; /* Smooth transition */
+}
+
+.control input:focus, 
+.control select:focus {
+    border-color: #567f59; /* Change border color on focus */
+    outline: none; /* Remove default outline */
+}
+
+/* Style for the submit button */
+.button.is-primary {
+    padding: 10px 20px; /* Space inside the button */
+    background-color: #6D9F71; /* Primary color */
+    color: rgb(251, 251, 251); /* Text color */
+    border: none; /* Remove border */
+    border-radius: 4px; /* Rounded corners */
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition */
+    justify-content: center;
+}
+
+.button.is-primary:hover {
+    background-color: #567f59; /* Darker color on hover */
+}
+
+/* beep */
+

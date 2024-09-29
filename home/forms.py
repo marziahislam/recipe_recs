@@ -27,7 +27,7 @@ class RecipeRecommendationForm(forms.Form):
     ingredients = forms.CharField(
         widget=forms.TextInput(attrs={'placeholder': 'Enter ingredients separated by commas'}),
         label='Ingredients in Fridge',
-        help_text='Type the ingredients you have, separated by commas.',
+        help_text='Enter ingredients: ',
         required=False  # Field is optional
     )
 

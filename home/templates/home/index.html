@@ -40,6 +40,13 @@
                     {{ form.skill_level }}
                 </div>
             </div>
+
+            <div class="field">
+                <label class="label">{{ form.nutrition_level.label }}</label>
+                <div class="control">
+                    {{ form.nutrition_level }}
+                </div>
+            </div>
     
             <div class="field">
                 <label class="label">{{ form.ingredients.label }}</label>
@@ -50,12 +57,11 @@
     
             <!-- Submit button -->
             <div class="field">
-                <div class="control">
+                <div class="control" style="display: flex; justify-content: center;">
                     <button type="submit" class="button is-primary">Get Recommendations</button>
                 </div>
             </div>
         </form>
-    
         <hr>
     </section>
 
@@ -65,7 +71,7 @@
             {% if recipes %}
                 {% for recipe in recipes %}
                     <div class="column is-half">
-                        <div class="card" style="height: 350px;"> <!-- Set a fixed height -->
+                        <div class="card"> <!-- Set a fixed height -->
                             <div class="card-content">
                                 <p class="title is-4">
                                     <a href="{{ recipe.sourceUrl }}" target="_blank">{{ recipe.title }}</a>
@@ -73,7 +79,7 @@
                                 <div class="columns">
                                     <div class="column is-one-third">
                                         <figure class="image is-4by3">
-                                            <img src="{{ recipe.image }}" alt="{{ recipe.title }}" style="height: auto;">
+                                            <img src="{{ recipe.image }}" alt="{{ recipe.title }}">
                                         </figure>
                                     </div>
                                     <div class="column">

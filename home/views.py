@@ -70,8 +70,6 @@ def get_recipes(ingredients, skill_level=None, nutrition_level=None):
                         # Ensure the ingredient has the necessary fields before appending
                         if 'name' in ingredient:
                             recipe['all_ingredients'].append(ingredient['name'])
-
-        print(json.dumps(data['results'], indent=2))  # Print only the relevant part of the response
         return recipes
     else:
         print(f"Error: {response.status_code} - {response.text}")
