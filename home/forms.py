@@ -26,14 +26,14 @@ NUTRITION_LEVEL_CHOICES = [
 class RecipeRecommendationForm(forms.Form):
     ingredients = forms.CharField(
         widget=forms.TextInput(attrs={'placeholder': 'Enter ingredients separated by commas'}),
-        label='Ingredients in Fridge',
+        label='Ingredients Available',
         help_text='Enter ingredients: ',
         required=False  
     )
 
     skill_level = forms.ChoiceField(
         choices=SKILL_LEVEL_CHOICES,
-        label='Skill Level',
+        label='Cooking Skill Level',
         help_text='Select your cooking skill level.',
         required=False  
     )
