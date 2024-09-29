@@ -1,8 +1,8 @@
-# recipe_recs/forms.py
+
 
 from django import forms
 
-# Define the skill level choices
+
 SKILL_LEVEL_CHOICES = [
     ('', 'None'),
     ('Beginner', 'Beginner'),
@@ -28,14 +28,14 @@ class RecipeRecommendationForm(forms.Form):
         widget=forms.TextInput(attrs={'placeholder': 'Enter ingredients separated by commas'}),
         label='Ingredients in Fridge',
         help_text='Enter ingredients: ',
-        required=False  # Field is optional
+        required=False  
     )
 
     skill_level = forms.ChoiceField(
         choices=SKILL_LEVEL_CHOICES,
         label='Skill Level',
         help_text='Select your cooking skill level.',
-        required=False  # Field is optional
+        required=False  
     )
 
     nutrition_level = forms.ChoiceField(
@@ -50,7 +50,7 @@ class RecipeRecommendationForm(forms.Form):
         skill_level = cleaned_data.get('skill_level')
         nutrition_level = cleaned_data.get('nutrition_level')
 
-        # Check if all fields are empty
+        
         if not ingredients and not skill_level and not nutrition_level:
             raise forms.ValidationError("You must fill out at least one field.")
         

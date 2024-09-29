@@ -1,5 +1,5 @@
 body {
-    /* margin-left: 20px;  Change the value to what you need */
+    
 }
 
 .custom-title-padding {
@@ -23,21 +23,21 @@ body {
 }
 
 .card {
-    height: 300px; /* Set a standard height for all cards */
+    height: 300px; 
     display: flex;
-    flex-direction: column; /* Ensure flex direction for uniformity */
-    /* background-color: rgb(250, 237, 212); */
+    flex-direction: column;
+    
 }
 
 .card-content {
-    flex-grow: 1; /* Allow content to grow */
+    flex-grow: 1; 
     display: flex;
-    flex-direction: column; /* Stack content vertically */
-    justify-content: flex-start; /* Align items at the start */
+    flex-direction: column; 
+    justify-content: flex-start;
 }
 
 .recipe-title {
-    margin-bottom: 1rem; /* Add a consistent margin below the title */
+    margin-bottom: 1rem;
 }
 
 .is-4by3 {
@@ -58,38 +58,36 @@ body {
 
 .control input, 
 .control select {
-    width: 70%; /* Full width */
-    padding: 10px; /* Space inside the fields */
-    border: 1px solid #ccc; /* Light border */
-    border-radius: 6px; /* Rounded corners */
-    font-size: 16px; /* Font size */
-    transition: border-color 0.3s; /* Smooth transition */
+    width: 70%; 
+    padding: 10px; 
+    border: 1px solid #ccc; 
+    border-radius: 6px; 
+    font-size: 16px; 
+    transition: border-color 0.3s;
 }
 
 .control input:focus, 
 .control select:focus {
-    border-color: #567f59; /* Change border color on focus */
-    outline: none; /* Remove default outline */
+    border-color: #567f59; 
+    outline: none; 
 }
 
-/* Style for the submit button */
 .button.is-primary {
-    padding: 10px 20px; /* Space inside the button */
-    background-color: #6D9F71; /* Primary color */
-    color: rgb(251, 251, 251); /* Text color */
-    border: none; /* Remove border */
-    border-radius: 4px; /* Rounded corners */
-    font-size: 16px; /* Font size */
-    cursor: pointer; /* Pointer cursor on hover */
-    transition: background-color 0.3s; /* Smooth transition */
+    padding: 10px 20px; 
+    background-color: #6D9F71;
+    color: rgb(251, 251, 251); 
+    border: none; 
+    border-radius: 4px; 
+    font-size: 16px; 
+    cursor: pointer;
+    transition: background-color 0.3s; 
     justify-content: center;
 }
 
 .button.is-primary:hover {
-    background-color: #567f59; /* Darker color on hover */
+    background-color: #567f59; 
 }
 
-/* beep */
 
 .is-1 {
     font-family: "Bungee", sans-serif;
