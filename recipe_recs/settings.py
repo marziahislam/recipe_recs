@@ -127,7 +127,7 @@ STATICFILES_DIRS = [
 EDAMAM_APP_ID = os.getenv('EDAMAM_APP_ID', '21cac59a')
 EDAMAM_APP_KEY = os.getenv('EDAMAM_APP_KEY', '01f73e1bc6c086712e4d3b22ab7ccd49')
 
-SPOON_API_KEY = '34319cc17db14f7d90614e0afde5b2c1'
+SPOON_API_KEY = '9306f38b814b4ae18b52a171c4e24a7c'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
