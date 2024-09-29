@@ -11,11 +11,15 @@
         {% for recipe in recipes %}
             <li>
                 <h2>{{ recipe.title }}</h2>
+                <h3>Image : </h3>
+                <img src ="{{ recipe.image  }}">
                 {% if recipe.image %}
                     <img src="{{ recipe.image }}" alt="{{ recipe.title }}" style="width: 100px; height: auto;">
                 {% else %}
+                <h2>{{ recipe.title }}</h2>
+                    <p>Image URL: {{ recipe.image }}</p>  Debugging output -->
                     <p>No image available</p>
-                {% endif %}
+                {% endif %} 
                 <h3>Ready in: {{ recipe.readyInMinutes }} minutes</h3>
                 <h3>Ingredients:</h3>
                 <ul>

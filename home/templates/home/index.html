@@ -38,6 +38,7 @@
     {% if recipes %}
         {% for recipe in recipes %}
             <li>
+                <img src="{{ recipe.image }}" alt="{{ recipe.title }}" style="width: 200px; height: auto;">
                 <a href="{{ recipe.sourceUrl }}" target="_blank">{{ recipe.title }}</a>
                 <p>Ready in {{ recipe.readyInMinutes }} minutes</p>
                 <p>Ingredients: 
