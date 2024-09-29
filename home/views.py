@@ -22,7 +22,6 @@ def recommend_recipe(request):
 
     return render(request, 'home/index.html', {'form': form, 'recipes': recommended_recipes})
 
-
 def get_recipes(ingredients, skill_level=None, nutrition_level=None):
     api_key = settings.SPOON_API_KEY
     base_url = 'https://api.spoonacular.com/recipes/complexSearch'
@@ -31,26 +30,23 @@ def get_recipes(ingredients, skill_level=None, nutrition_level=None):
 
     # Set up query parameters for Spoonacular API
     params = {
-        'apiKey': api_key,  # API key for authentication
-        'includeIngredients': ingredient_string,  # Comma-separated list of ingredients
-        'number': 10,  # Fetch up to 10 recipes
-        'addRecipeInformation': True,  # Include full recipe details in the response
+        'apiKey': api_key,
+        'includeIngredients': ingredient_string,
+        'number': 10,
+        'addRecipeInformation': True,  # Make sure this is True
+        'instructionsRequired': True,  # Optional: only return recipes with instructions
     }
 
-    # Add diet filter based on nutrition level
     if nutrition_level:
-        params['diet'] = nutrition_level  # E.g., 'vegetarian', 'gluten free', etc.
+        params['diet'] = nutrition_level
 
-    # Add skill level filtering
     if skill_level == 'Beginner':
-        params['maxIngredients'] = 5  # Recipes for beginners with fewer ingredients
-        params['maxReadyTime'] = 30  # Recipes that can be prepared in 30 minutes or less
+        params['maxIngredients'] = 5
+        params['maxReadyTime'] = 30
     elif skill_level == 'Intermediate':
-        params['maxIngredients'] = 10  # Recipes for intermediate cooks with up to 10 ingredients
-        params['maxReadyTime'] = 60  # Recipes that take up to 60 minutes to prepare
+        params['maxIngredients'] = 10
+        params['maxReadyTime'] = 60
     elif skill_level == 'Advanced':
-        # For advanced users, no restrictions on ingredients or time
-        # You can add more complex filters for advanced if desired
         pass
 
     # Make the API request
@@ -58,7 +54,20 @@ def get_recipes(ingredients, skill_level=None, nutrition_level=None):
 
     if response.status_code == 200:
         data = response.json()
-        return data.get('results', [])  # Spoonacular returns recipes under the 'results' key
+        recipes = data.get('results', [])
+
+        # Process recipes to extract ingredients from analyzed instructions
+        for recipe in recipes:
+            recipe['all_ingredients'] = []  # Initialize list to hold all ingredients
+
+            # Loop through analyzed instructions
+            for instruction in recipe.get('analyzedInstructions', []):
+                for step in instruction.get('steps', []):
+                    for ingredient in step.get('ingredients', []):
+                        recipe['all_ingredients'].append(ingredient)
+
+        return recipes
     else:
         print(f"Error: {response.status_code} - {response.text}")
         return []  # Return an empty list if there's an issue with the API call
+

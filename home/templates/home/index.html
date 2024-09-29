@@ -34,20 +34,24 @@
 
     <!-- Display the search results -->
     <h2>Recommended Recipes:</h2>
+<ul>
+    {% if recipes %}
+        {% for recipe in recipes %}
+            <li>
+                <a href="{{ recipe.sourceUrl }}" target="_blank">{{ recipe.title }}</a>
+                <p>Ready in {{ recipe.readyInMinutes }} minutes</p>
+                <p>Ingredients: 
+                    {{ recipe.all_ingredients|join:', ' }}  <!-- Join ingredients with a comma -->
+                </p>
+            </li>
+        {% endfor %}
+    {% else %}
+        <p>No recipes found based on your search.</p>
+    {% endif %}
+</ul>
 
-    <ul>
-        {% if recipes %}
-            {% for recipe in recipes %}
-                <li>
-                    <a href="{{ recipe.sourceUrl }}" target="_blank">{{ recipe.title }}</a>
-                    <p>Ready in {{ recipe.readyInMinutes }} minutes</p>
-                    <p>Ingredients: {{ recipe.missedIngredientCount }} missed, {{ recipe.usedIngredientCount }} used</p>
-                </li>
-            {% endfor %}
-        {% else %}
-            <p>No recipes found based on your search.</p>
-        {% endif %}
-    </ul>
+    
+    
 
 </body>
 </html>

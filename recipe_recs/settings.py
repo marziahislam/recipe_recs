@@ -124,7 +124,7 @@ STATIC_URL = 'static/'
 EDAMAM_APP_ID = os.getenv('EDAMAM_APP_ID', '21cac59a')
 EDAMAM_APP_KEY = os.getenv('EDAMAM_APP_KEY', '01f73e1bc6c086712e4d3b22ab7ccd49')
 
-SPOON_API_KEY = 'ad8f7abbed2e48308d37260ef6a02b73'
+SPOON_API_KEY = '1d9b90c60d39423eb9ccb286c4c989f6'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
