@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -118,6 +119,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+
+# Edamam API Credentials
+EDAMAM_APP_ID = os.getenv('EDAMAM_APP_ID', '21cac59a')
+EDAMAM_APP_KEY = os.getenv('EDAMAM_APP_KEY', '01f73e1bc6c086712e4d3b22ab7ccd49')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

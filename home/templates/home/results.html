@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Recommendations</title>
+</head>
+<body>
+    <a href="{% url 'recommend_recipe' %}">Back to Home</a>
+    <h1>Recommended Recipes</h1>
+    {% if recipes %}
+        <ul>
+        {% for recipe in recipes %}
+            <li>
+                <a href="{{ recipe.recipe.url }}">{{ recipe.recipe.label }}</a>
+                <p>Ingredients: {{ recipe.recipe.ingredientLines|join:', ' }}</p>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No recipes found.</p>
+    {% endif %}
+</body>
+</html>

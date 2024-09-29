@@ -8,7 +8,6 @@ class SkillLevel(models.Model):
 
 class NutritionLevel(models.Model):
     nutrition_type = models.CharField(max_length=100)
-    max_calories = models.IntegerField()
 
     def __str__(self):
         return self.nutrition_type
