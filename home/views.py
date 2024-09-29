@@ -24,14 +24,14 @@ def recommend_recipe(request):
 
 
 def get_recipes(ingredients, skill_level=None, nutrition_level=None):
-    ingredient_string = ','.join(ingredients)
-    
     api_key = settings.SPOON_API_KEY
     base_url = 'https://api.spoonacular.com/recipes/complexSearch'
 
+    ingredient_string = ','.join(ingredients)
+
     # Set up query parameters for Spoonacular API
     params = {
-        'apiKey': api_key,  # Spoonacular requires apiKey for authentication
+        'apiKey': api_key,  # API key for authentication
         'includeIngredients': ingredient_string,  # Comma-separated list of ingredients
         'number': 10,  # Fetch up to 10 recipes
         'addRecipeInformation': True,  # Include full recipe details in the response
@@ -41,13 +41,17 @@ def get_recipes(ingredients, skill_level=None, nutrition_level=None):
     if nutrition_level:
         params['diet'] = nutrition_level  # E.g., 'vegetarian', 'gluten free', etc.
 
-    # Add skill level filtering by limiting max preparation time or number of ingredients
+    # Add skill level filtering
     if skill_level == 'Beginner':
-        params['maxIngredients'] = 5  # Beginner recipes should have fewer ingredients
-        params['maxReadyTime'] = 30  # Max preparation time for beginners
+        params['maxIngredients'] = 5  # Recipes for beginners with fewer ingredients
+        params['maxReadyTime'] = 30  # Recipes that can be prepared in 30 minutes or less
     elif skill_level == 'Intermediate':
-        params['maxIngredients'] = 10  # Intermediate recipes have more ingredients
-        params['maxReadyTime'] = 60  # Intermediate skill level allows for more cooking time
+        params['maxIngredients'] = 10  # Recipes for intermediate cooks with up to 10 ingredients
+        params['maxReadyTime'] = 60  # Recipes that take up to 60 minutes to prepare
+    elif skill_level == 'Advanced':
+        # For advanced users, no restrictions on ingredients or time
+        # You can add more complex filters for advanced if desired
+        pass
 
     # Make the API request
     response = requests.get(base_url, params=params)

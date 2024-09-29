@@ -1,28 +1,47 @@
 # recipe_recs/forms.py
 
 from django import forms
-from .models import SkillLevel, NutritionLevel
+
+# Define the skill level choices
+SKILL_LEVEL_CHOICES = [
+    ('', 'None'),
+    ('Beginner', 'Beginner'),
+    ('Intermediate', 'Intermediate'),
+    ('Advanced', 'Advanced'),
+]
+
+NUTRITION_LEVEL_CHOICES = [
+    ('', 'None'),
+    ('Gluten Free', 'Gluten Free'),
+    ('Ketogenic', 'Ketogenic'),
+    ('Vegetarian', 'Vegetarian'),
+    ('Vegan', 'Vegan'),
+    ('Paleo', 'Paleo'),
+    ('Pescetarian', 'Pescetarian'),
+    ('Low-calorie', 'Low-calorie'),
+    ('Low-carb', 'Low-carb'),
+    ('High-protein', 'High-protein'),
+]
 
 class RecipeRecommendationForm(forms.Form):
     ingredients = forms.CharField(
         widget=forms.TextInput(attrs={'placeholder': 'Enter ingredients separated by commas'}),
         label='Ingredients in Fridge',
         help_text='Type the ingredients you have, separated by commas.',
-        required=False  # Make field optional
+        required=False  # Field is optional
     )
 
-    skill_level = forms.ModelChoiceField(
-        queryset=SkillLevel.objects.all(),  # You could also hard-code options
+    skill_level = forms.ChoiceField(
+        choices=SKILL_LEVEL_CHOICES,
         label='Skill Level',
         help_text='Select your cooking skill level.',
-        required=False  # Make field optional
+        required=False  # Field is optional
     )
 
-    nutrition_level = forms.ModelChoiceField(
-        queryset=NutritionLevel.objects.all(),  # You could also hard-code options
+    nutrition_level = forms.ChoiceField(
+        choices=NUTRITION_LEVEL_CHOICES,
         label='Nutrition Preferences',
-        help_text='Select your nutrition preferences.',
-        required=False  # Make field optional
+        required=False
     )
 
     def clean(self):
