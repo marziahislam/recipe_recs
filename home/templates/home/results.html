@@ -3,22 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recipe Recommendations</title>
+    <title>Recommended Recipes</title>
 </head>
 <body>
-    <a href="{% url 'recommend_recipe' %}">Back to Home</a>
     <h1>Recommended Recipes</h1>
-    {% if recipes %}
-        <ul>
+    <ul>
         {% for recipe in recipes %}
             <li>
-                <a href="{{ recipe.recipe.url }}">{{ recipe.recipe.label }}</a>
-                <p>Ingredients: {{ recipe.recipe.ingredientLines|join:', ' }}</p>
+                <h2>{{ recipe.title }}</h2>
+                {% if recipe.image %}
+                    <img src="{{ recipe.image }}" alt="{{ recipe.title }}" style="width: 100px; height: auto;">
+                {% else %}
+                    <p>No image available</p>
+                {% endif %}
+                <h3>Ready in: {{ recipe.readyInMinutes }} minutes</h3>
+                <h3>Ingredients:</h3>
+                <ul>
+                    {% for ingredient in recipe.all_ingredients %}
+                        <li>{{ ingredient }}</li>  <!-- Display only the ingredient name -->
+                    {% endfor %}
+                </ul>
             </li>
         {% endfor %}
-        </ul>
-    {% else %}
-        <p>No recipes found.</p>
-    {% endif %}
+    </ul>
+    <a href="{% url 'recommend_recipes' %}">Back</a>
 </body>
 </html>

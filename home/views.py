@@ -5,6 +5,7 @@ from django.shortcuts import render
 from .forms import RecipeRecommendationForm
 from .models import Recipe
 import requests
+import json
 
 def recommend_recipe(request):
     form = RecipeRecommendationForm()
@@ -59,15 +60,22 @@ def get_recipes(ingredients, skill_level=None, nutrition_level=None):
         # Process recipes to extract ingredients from analyzed instructions
         for recipe in recipes:
             recipe['all_ingredients'] = []  # Initialize list to hold all ingredients
+            recipe['image'] = recipe.get('image')  # Get the recipe image
+            recipe['readyInMinutes'] = recipe.get('readyInMinutes')  # Get the preparation time
 
             # Loop through analyzed instructions
             for instruction in recipe.get('analyzedInstructions', []):
                 for step in instruction.get('steps', []):
                     for ingredient in step.get('ingredients', []):
-                        recipe['all_ingredients'].append(ingredient)
+                        # Ensure the ingredient has the necessary fields before appending
+                        if 'name' in ingredient:
+                            recipe['all_ingredients'].append(ingredient['name'])
 
+        print(json.dumps(data['results'], indent=2))  # Print only the relevant part of the response
         return recipes
     else:
         print(f"Error: {response.status_code} - {response.text}")
         return []  # Return an empty list if there's an issue with the API call
+
+
 
