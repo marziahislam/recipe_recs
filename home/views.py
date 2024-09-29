@@ -33,7 +33,7 @@ def get_recipes(ingredients, skill_level=None, nutrition_level=None):
     params = {
         'apiKey': api_key,
         'includeIngredients': ingredient_string,
-        'number': 10,
+        'number': 30,
         'addRecipeInformation': True,  
         'instructionsRequired': True,  
     }
